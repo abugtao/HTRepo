@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://github.com/abugtao/HTTool.git'
+  s.homepage         = 'https://github.com/abugtao'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'abugtao@163.com' => 'zhanghaitao@baoyinxiaofei.com' }
@@ -30,7 +30,27 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'HTTool/Classes/**/*'
+  s.source_files = 'HTTool/Classes/*.{h,m}'
+
+
+  s.subspec 'macro' do |macro|
+      macro.source_files = 'HTTool/Classes/macro/**/*'
+  end
+
+  #这里创建组件中的文件夹
+  s.subspec 'category' do |category|
+      category.source_files = 'HTTool/Classes/category/**/*'
+      #这行解决文件夹中的类对别的文件夹的类有依赖
+      category.dependency 'HTTool/macro'
+      
+  end
+  
+  s.subspec 'tool' do |tool|
+      tool.source_files = 'HTTool/Classes/tool/**/*'
+  end
+  
+  
+  
   
   # s.resource_bundles = {
   #   'HTTool' => ['HTTool/Assets/*.png']
